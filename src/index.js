@@ -1,10 +1,11 @@
 import { createReadStream, existsSync } from 'fs'
-import { resolve } from 'path'
+import { resolve, dirname } from 'path'
 
-import probe from 'probe-image-size'
-import interpolate from 'interpolate'
 import easyimage from 'easyimage'
+import interpolate from 'interpolate'
 import invariant from 'invariant'
+import mkdirp from 'mkdirp'
+import probe from 'probe-image-size'
 
 import { calculateTiles } from './utils'
 
@@ -29,6 +30,8 @@ async function convert({ source, target, rows = 3, columns = 3, margin = '25%', 
 
   await Promise.all(tiles.map(tile => {
     const tilePath = resolve(cwd, interpolate(target, { column: tile.column, row: tile.row }))
+
+    mkdirp.sync(dirname(tilePath));
 
     const params = {
       src: source,

@@ -32,11 +32,17 @@ async function main() {
   const source = cli.input[0]
   const target = cli.input[1]
 
-  if (!source) {
+  if (!source || !target) {
     exit()
   }
 
-  await convert({ source, target, rows: cli.rows, columns: cli.columns })
+  await convert({
+    source,
+    target,
+    rows: cli.flags.rows,
+    columns: cli.flags.columns,
+    margin: cli.flags.margin
+  })
 }
 
 main()
