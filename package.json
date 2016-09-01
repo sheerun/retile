@@ -1,6 +1,6 @@
 {
   "name": "retile",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Adam Stankiewicz <sheerun@sher.pl>",
   "description": "Split image into overlaping tiles with similar dimensions",
   "repository": "sheerun/retile",
