@@ -1,6 +1,6 @@
 {
   "name": "retile",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "Adam Stankiewicz <sheerun@sher.pl>",
   "description": "Split image into overlaping tiles with similar dimensions",
   "repository": "sheerun/retile",
@@ -55,9 +55,16 @@
     "semicolon": false,
     "esnext": true,
     "rules": {
-      "xo/no-process-exit": ["off"],
-      "babel/object-curly-spacing": ["error", "always"]
+      "xo/no-process-exit": [
+        "off"
+      ],
+      "babel/object-curly-spacing": [
+        "error",
+        "always"
+      ]
     }
   },
-  "files": ["lib"]
+  "files": [
+    "lib"
+  ]
 }
