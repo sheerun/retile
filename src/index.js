@@ -40,7 +40,7 @@ async function convert({ source, target, rows = 3, columns = 3, margin = '25%', 
       gravity: 'NorthWest'
     }
 
-    return easyimage.crop(params);
+    return easyimage.crop(params)
   }))
 
   return
