@@ -31,7 +31,7 @@ async function convert({ source, target, rows = 3, columns = 3, margin = '25%', 
   await Promise.all(tiles.map(tile => {
     const tilePath = resolve(cwd, interpolate(target, { column: tile.column, row: tile.row }))
 
-    mkdirp.sync(dirname(tilePath));
+    mkdirp.sync(dirname(tilePath))
 
     const params = {
       src: source,
