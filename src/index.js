@@ -1,15 +1,22 @@
-import { createReadStream, existsSync } from 'fs'
-import { resolve, dirname } from 'path'
+const { createReadStream, existsSync } = require('fs')
+const { resolve, dirname } = require('path')
 
-import easyimage from 'easyimage'
-import interpolate from 'interpolate'
-import invariant from 'invariant'
-import mkdirp from 'mkdirp'
-import probe from 'probe-image-size'
+const easyimage = require('easyimage')
+const interpolate = require('interpolate')
+const invariant = require('invariant')
+const mkdirp = require('mkdirp')
+const probe = require('probe-image-size')
 
-import { calculateTiles } from './utils'
+const { calculateTiles } = require('./utils')
 
-async function convert({ source, target, rows = 3, columns = 3, margin = '25%', cwd = process.cwd() }) {
+async function convert ({
+  source,
+  target,
+  rows = 3,
+  columns = 3,
+  margin = '25%',
+  cwd = process.cwd()
+}) {
   invariant(typeof source === 'string', '"source" need to be a path')
   invariant(typeof rows === 'number', '"rows" need to be a number')
   invariant(typeof columns === 'number', '"columns" need to be a number')
@@ -25,28 +32,35 @@ async function convert({ source, target, rows = 3, columns = 3, margin = '25%', 
   const { width, height } = await probe(input)
 
   const tiles = calculateTiles({
-    width, height, columns, rows, margin
+    width,
+    height,
+    columns,
+    rows,
+    margin
   })
 
-  await Promise.all(tiles.map(tile => {
-    const tilePath = resolve(cwd, interpolate(target, { column: tile.column, row: tile.row }))
+  await Promise.all(
+    tiles.map(tile => {
+      const tilePath = resolve(
+        cwd,
+        interpolate(target, { column: tile.column, row: tile.row })
+      )
 
-    mkdirp.sync(dirname(tilePath))
+      mkdirp.sync(dirname(tilePath))
 
-    const params = {
-      src: source,
-      dst: tilePath,
-      cropwidth: tile.width,
-      cropheight: tile.height,
-      x: tile.left,
-      y: tile.top,
-      gravity: 'NorthWest'
-    }
+      const params = {
+        src: source,
+        dst: tilePath,
+        cropwidth: tile.width,
+        cropheight: tile.height,
+        x: tile.left,
+        y: tile.top,
+        gravity: 'NorthWest'
+      }
 
-    return easyimage.crop(params)
-  }))
-
-  return
+      return easyimage.crop(params)
+    })
+  )
 }
 
-export default convert
+module.exports = convert

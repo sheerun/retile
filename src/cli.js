@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-import meow from 'meow'
-import convert from './index'
+const meow = require('meow')
+const convert = require('./index')
 
-const cli = meow(`
+const cli = meow(
+  `
   Usage
     $ retile <input> <output>
 
@@ -14,21 +15,23 @@ const cli = meow(`
 
   Examples
     $ retile input.png output/{row}_{column}.png
-`, {
-  inferType: true,
-  alias: {
-    columns: 'c',
-    rows: 'r',
-    margin: 'm'
+`,
+  {
+    inferType: true,
+    alias: {
+      columns: 'c',
+      rows: 'r',
+      margin: 'm'
+    }
   }
-})
+)
 
-function exit() {
+function exit () {
   console.log(cli.help)
   process.exit(1)
 }
 
-async function main() {
+async function main () {
   const source = cli.input[0]
   const target = cli.input[1]
 

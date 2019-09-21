@@ -1,7 +1,6 @@
-import test from 'ava'
-import { calculateTiles as originalCalculateTiles } from './utils'
+const { calculateTiles: originalCalculateTiles } = require('./utils')
 
-function calculateTiles(params) {
+function calculateTiles (params) {
   const tiles = originalCalculateTiles(params)
 
   tiles.forEach(tile => {
@@ -12,7 +11,7 @@ function calculateTiles(params) {
   return tiles
 }
 
-test('can extract just single tile', t => {
+test('can extract just single tile', () => {
   const result = calculateTiles({
     width: 20,
     height: 20,
@@ -20,12 +19,10 @@ test('can extract just single tile', t => {
     rows: 1
   })
 
-  t.deepEqual(result, [
-    { left: 0, top: 0, width: 20, height: 20 }
-  ])
+  expect(result).toEqual([{ left: 0, top: 0, width: 20, height: 20 }])
 })
 
-test('can perform simple division without overlap', t => {
+test('can perform simple division without overlap', () => {
   const result = calculateTiles({
     width: 40,
     height: 20,
@@ -33,7 +30,7 @@ test('can perform simple division without overlap', t => {
     rows: 2
   })
 
-  t.deepEqual(result, [
+  expect(result).toEqual([
     { left: 0, top: 0, width: 20, height: 10 },
     { left: 20, top: 0, width: 20, height: 10 },
     { left: 0, top: 10, width: 20, height: 10 },
@@ -41,7 +38,7 @@ test('can perform simple division without overlap', t => {
   ])
 })
 
-test('properly rounds on uneven divide', t => {
+test('properly rounds on uneven divide', () => {
   const result = calculateTiles({
     width: 8,
     height: 8,
@@ -49,7 +46,7 @@ test('properly rounds on uneven divide', t => {
     rows: 3
   })
 
-  t.deepEqual(result, [
+  expect(result).toEqual([
     { left: 0, top: 0, width: 3, height: 3 },
     { left: 3, top: 0, width: 2, height: 3 },
     { left: 5, top: 0, width: 3, height: 3 },
@@ -62,7 +59,7 @@ test('properly rounds on uneven divide', t => {
   ])
 })
 
-test('can perform simple division with margin in percents', t => {
+test('can perform simple division with margin in percents', () => {
   const result = calculateTiles({
     width: 40,
     height: 20,
@@ -71,7 +68,7 @@ test('can perform simple division with margin in percents', t => {
     margin: '50%'
   })
 
-  t.deepEqual(result, [
+  expect(result).toEqual([
     { left: 0, top: 0, width: 30, height: 15 },
     { left: 10, top: 0, width: 30, height: 15 },
     { left: 0, top: 5, width: 30, height: 15 },
@@ -79,7 +76,7 @@ test('can perform simple division with margin in percents', t => {
   ])
 })
 
-test('properly rounds on uneven divide with overlap', t => {
+test('properly rounds on uneven divide with overlap', () => {
   const result = calculateTiles({
     width: 60,
     height: 90,
@@ -88,7 +85,7 @@ test('properly rounds on uneven divide with overlap', t => {
     margin: '50%'
   })
 
-  t.deepEqual(result, [
+  expect(result).toEqual([
     { left: 0, top: 0, width: 30, height: 45 },
     { left: 15, top: 0, width: 30, height: 45 },
     { left: 30, top: 0, width: 30, height: 45 },

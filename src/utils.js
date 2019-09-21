@@ -1,13 +1,22 @@
-import invariant from 'invariant'
-import percent from 'percent'
-import computeLayout from 'css-layout'
-import merge from 'lodash.merge'
+const invariant = require('invariant')
+const percent = require('percent')
+const computeLayout = require('css-layout')
+const merge = require('lodash.merge')
 
-export function calculateTiles(options = {}) {
-  invariant(typeof options.width === 'number', 'Must provide numeric width to calculateTiles')
-  invariant(typeof options.height === 'number', 'Must provide numeric height to calculateTiles')
+function calculateTiles (options = {}) {
+  invariant(
+    typeof options.width === 'number',
+    'Must provide numeric width to calculateTiles'
+  )
+  invariant(
+    typeof options.height === 'number',
+    'Must provide numeric height to calculateTiles'
+  )
   invariant(options.rows !== undefined, 'Must provide rows to calculateTiles')
-  invariant(options.columns !== undefined, 'Must provide columns to calculateTiles')
+  invariant(
+    options.columns !== undefined,
+    'Must provide columns to calculateTiles'
+  )
 
   const { width, height, rows: rowsCount, columns: columnsCount } = options
 
@@ -76,21 +85,25 @@ export function calculateTiles(options = {}) {
     let marginHorizontal
 
     if (percent.valid(margin)) {
-      marginVertical = percent.convert(margin) / 100 * tileHeight
-      marginHorizontal = percent.convert(margin) / 100 * tileWidth
+      marginVertical = (percent.convert(margin) / 100) * tileHeight
+      marginHorizontal = (percent.convert(margin) / 100) * tileWidth
     } else {
       marginVertical = marginHorizontal = margin
     }
 
     if (columnsCount > 1) {
-      const marginLeft = Math.round(tile.column * marginHorizontal / (columnsCount - 1))
+      const marginLeft = Math.round(
+        (tile.column * marginHorizontal) / (columnsCount - 1)
+      )
       const marginRight = marginHorizontal - marginLeft
       tile.left = Math.max(0, tile.left - marginLeft)
       tile.right = Math.min(width, tile.right + marginRight)
     }
 
     if (rowsCount > 1) {
-      const marginTop = Math.round(tile.row * marginVertical / (rowsCount - 1))
+      const marginTop = Math.round(
+        (tile.row * marginVertical) / (rowsCount - 1)
+      )
       const marginBottom = marginVertical - marginTop
       tile.top = Math.max(0, tile.top - marginTop)
       tile.bottom = Math.min(height, tile.bottom + marginBottom)
@@ -106,3 +119,5 @@ export function calculateTiles(options = {}) {
 
   return result
 }
+
+module.exports = { calculateTiles }
