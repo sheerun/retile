@@ -1,8 +1,4 @@
-# retile
-
-[![Unix CI](https://img.shields.io/travis/sheerun/retile/master.svg?maxAge=2592000)](https://travis-ci.org/sheerun/retile)
-[![Windows CI](https://img.shields.io/appveyor/ci/sheerun/retile/master.svg)](https://ci.appveyor.com/project/sheerun/retile)
-[![Modern Node](https://img.shields.io/badge/modern-node-9BB48F.svg)](https://github.com/sheerun/retile)
+# retile [![Unix CI](https://img.shields.io/travis/sheerun/retile/master.svg?maxAge=2592000)](https://travis-ci.org/sheerun/retile) [![Modern Node](https://img.shields.io/badge/modern-node-9BB48F.svg)](https://github.com/sheerun/retile)
 
 > Split image into overlaping tiles with similar dimensions
 
@@ -24,7 +20,7 @@ Options
   --margin, -m   Margin for each tile in pixels or percent (default: 25%)
 
 Examples
-  $ retile input.png output/{row}_{column}.pn
+  $ retile input.png output/{row}_{column}.png
 ```
 
 ## Programmatic usage
