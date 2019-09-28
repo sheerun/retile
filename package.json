@@ -23,18 +23,12 @@
     "probe-image-size": "^2.1.1"
   },
   "devDependencies": {
-    "modern-node": "^2.4.0"
+    "modern-node": "^2.5.1"
   },
   "scripts": {
     "test": "modern test",
     "format": "modern format",
     "lint": "modern lint",
     "precommit": "modern precommit"
-  },
-  "lint-staged": {
-    "*.js": [
-      "modern lint",
-      "git add"
-    ]
   }
 }
